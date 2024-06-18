@@ -1,0 +1,93 @@
+<h4>CustomGCodePopUp Settings</h4>
+<form class="form-horizontal" id="settings_plugin_CustomGCodePopUp_form">
+	<div class="control-group">
+		<label class="control-label">{{ _('Message Type') }}</label>
+		<div class="controls">
+			<select data-bind="options: msgTypes,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.CustomGCodePopUp.msgType"></select>
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.CustomGCodePopUp.msgType() != 'disabled'">
+		<label class="control-label">{{ _('Auto Close') }}</label>
+		<div class="controls">
+			<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.CustomGCodePopUp.autoClose,enabled: settingsViewModel.settings.plugins.CustomGCodePopUp.msgType() != 'disabled'">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{ _('Exclude RegEx') }}</label>
+		<div class="controls">
+			<input type="text" data-bind="value: settingsViewModel.settings.plugins.CustomGCodePopUp.regex_include"/>
+			<span class="help-inline">The regular expression is compared against the text in the message using python's re.search so if the pattern is found anywhere in the message it will be excluded. Multiple patterns should be able to be achieved using | in the regular expression for example (LAYERINDICATOR|IGNOREME) would match LAYERINDICATOR or IGNOREME and not pop up those messages.</span>
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: true">
+		<label class="control-label">{{ _('Enable Speech') }}</label>
+		<div class="controls">
+			<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.CustomGCodePopUp.enableSpeech">
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.CustomGCodePopUp.enableSpeech">
+		<label class="control-label">{{ _('Voice') }}</label>
+		<div class="controls">
+			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.CustomGCodePopUp.speechVoice"></select>
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.CustomGCodePopUp.enableSpeech">
+		<label class="control-label">{{ _('Volume') }}</label>
+		<div class="controls">
+			<div class="slider slider-horizontal" style="width: 165px;">
+				<div class="slider-track">
+					<div class="slider-selection" style="left: 0%; width: 50%;"></div>
+					<div class="slider-handle round" style="left: 50%;"></div>
+					<div class="slider-handle round hide" style="left: 0%;"></div>
+				</div>
+				<div class="tooltip top hide" style="top: -24px; left: -5px;">
+					<div class="tooltip-arrow"></div>
+					<div class="tooltip-inner">100</div>
+				</div>
+				<input type="number" style="width: 153px; display: none;" data-bind="slider: {min: 0, max: 1, step: .1, value: settingsViewModel.settings.plugins.CustomGCodePopUp.speechVolume, tooltip: 'hide'}">
+			</div>
+			<div data-bind="text: settingsViewModel.settings.plugins.CustomGCodePopUp.speechVolume" style="display:inline;padding-left:20px;"></div>
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.CustomGCodePopUp.enableSpeech">
+		<label class="control-label">{{ _('Pitch') }}</label>
+		<div class="controls">
+			<div class="slider slider-horizontal" style="width: 165px;">
+				<div class="slider-track">
+					<div class="slider-selection" style="left: 0%; width: 50%;"></div>
+					<div class="slider-handle round" style="left: 50%;"></div>
+					<div class="slider-handle round hide" style="left: 0%;"></div>
+				</div>
+				<div class="tooltip top hide" style="top: -24px; left: -5px;">
+					<div class="tooltip-arrow"></div>
+					<div class="tooltip-inner">100</div>
+				</div>
+				<input type="number" style="width: 153px; display: none;" data-bind="slider: {min: 0, max: 2, step: .1, value: settingsViewModel.settings.plugins.CustomGCodePopUp.speechPitch, tooltip: 'hide'}">
+			</div>
+			<div data-bind="text: settingsViewModel.settings.plugins.CustomGCodePopUp.speechPitch" style="display:inline;padding-left:20px;"></div>
+		</div>
+	</div>
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.CustomGCodePopUp.enableSpeech">
+		<label class="control-label">{{ _('Rate') }}</label>
+		<div class="controls">
+			<div class="slider slider-horizontal" style="width: 165px;">
+				<div class="slider-track">
+					<div class="slider-selection" style="left: 0%; width: 50%;"></div>
+					<div class="slider-handle round" style="left: 50%;"></div>
+					<div class="slider-handle round hide" style="left: 0%;"></div>
+				</div>
+				<div class="tooltip top hide" style="top: -24px; left: -5px;">
+					<div class="tooltip-arrow"></div>
+					<div class="tooltip-inner">100</div>
+				</div>
+				<input type="number" style="width: 153px; display: none;" data-bind="slider: {min: .1, max: 10, step: .1, value: settingsViewModel.settings.plugins.CustomGCodePopUp.speechRate, tooltip: 'hide'}">
+			</div>
+			<div data-bind="text: settingsViewModel.settings.plugins.CustomGCodePopUp.speechRate" style="display:inline;padding-left:20px;"></div>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<button class="btn btn-primary" data-bind="click: testPopUp">Test</button>
+		</div>
+	</div>
+</form>
